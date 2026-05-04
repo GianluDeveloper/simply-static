@@ -1929,4 +1929,38 @@ class Util {
 
 		return $normalized_url;
 	}
+
+	/**
+	 * Build a coherent set of CloudFront invalidation paths.
+	 *
+	 * @param string $configured_paths Comma-separated list of paths.
+	 * @param array  $transferred_paths Optional transferred file paths.
+	 *
+	 * @return array
+	 */
+	public static function get_cloudfront_invalidation_paths( $configured_paths = '', $transferred_paths = array() ) {
+		$paths = array();
+
+		if ( ! empty( $configured_paths ) ) {
+			$paths = array_map( 'trim', explode( ',', $configured_paths ) );
+		}
+
+		$paths = array_filter( $paths );
+
+		if ( empty( $paths ) && ! empty( $transferred_paths ) ) {
+			$paths = array_map(
+				function( $path ) {
+					$path = '/' . ltrim( (string) $path, '/' );
+					return preg_replace( '#/+#', '/', $path );
+				},
+				$transferred_paths
+			);
+		}
+
+		if ( empty( $paths ) ) {
+			$paths = array( '/*' );
+		}
+
+		return array_values( array_unique( $paths ) );
+	}
 }

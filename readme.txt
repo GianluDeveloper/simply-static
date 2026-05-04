@@ -43,10 +43,20 @@ Your WordPress site stays private and secure. Your static site is what visitors 
 * One-click static site generation
 * Export as ZIP file
 * Deploy to local directory
+* Deploy to AWS S3 with optional CloudFront invalidation
 * Replace URLs (absolute, relative, or offline use)
 * Works with any WordPress theme
 * Compatible with popular page builders (Elementor, Bricks, Gutenberg)
 * SEO plugin support (Yoast, Rank Math, AIOSEO)
+
+= Secure AWS Credentials =
+For production environments, define AWS credentials in `wp-config.php` so secrets are not stored in the admin UI:
+
+`define( 'SIMPLY_STATIC_AWS_ACCESS_KEY', 'your-access-key-id' );`
+`define( 'SIMPLY_STATIC_AWS_ACCESS_SECRET', 'your-secret-access-key' );`
+
+You can also define CloudFront invalidation paths (defaults to `/*`):
+`define( 'SIMPLY_STATIC_AWS_CLOUDFRONT_INVALIDATION_PATHS', '/*' );`
 
 = Ready for More? =
 The free version is perfect for simple static exports, but if you need advanced deployment, automation, and powerful features, check out our premium solutions.
