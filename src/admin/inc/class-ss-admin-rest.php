@@ -1115,6 +1115,7 @@ class Admin_Rest {
             'aws_bucket'                    => '',
             'aws_subdirectory'              => '',
             'aws_distribution_id'           => '',
+            'aws_cloudfront_invalidation_paths' => '/*',
             'aws_webhook_url'               => '',
             'aws_empty'                     => false,
             's3_access_key'                 => '',
